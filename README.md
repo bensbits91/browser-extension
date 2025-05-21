@@ -1,54 +1,82 @@
-# React + TypeScript + Vite
+# Simple Browser Extension
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple browser extension built with [Vite](https://vitejs.dev/), [React](https://react.dev/), and [TypeScript](https://www.typescriptlang.org/).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Popup UI with React components (Counter, Input, Script Injector, Tab Info)
+- Dark mode toggle
+- Saves input data using Chrome storage
+- Injects scripts into the current tab
+- Displays current tab information
+- Background and content scripts
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Installation
+
+```sh
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To start the development server:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm run dev
 ```
+
+### Build
+
+To build the extension for production:
+
+```sh
+npm run build
+```
+
+The output will be in the `dist/` directory.
+
+### Lint
+
+To lint the code:
+
+```sh
+npm run lint
+```
+
+## Load the Extension in Chrome
+
+1. Build the project (`npm run build`).
+2. Open Chrome and go to `chrome://extensions/`.
+3. Enable "Developer mode".
+4. Click "Load unpacked" and select the `dist/` directory.
+
+## Project Structure
+
+- `src/` - Source code
+  - `components/` - React components
+  - `hooks/` - Custom React hooks
+  - `utils/` - Utility functions for Chrome APIs
+  - `background/` - Background script
+  - `content/` - Content script
+  - `popup/` - Popup HTML and entry point
+- `public/manifest.json` - Chrome extension manifest
+
+## Permissions
+
+This extension requests the following permissions:
+- `storage`
+- `activeTab`
+- `scripting`
+
+See [`public/manifest.json`](public/manifest.json) for details.
+
+## License
+
+MIT
